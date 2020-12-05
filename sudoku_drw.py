@@ -9,11 +9,13 @@ def drow(win, arr, pos, donotchange, start_time):
     for temp in donotchange:
         pygame.draw.rect(win, (105,105,105), (temp[0]*50,temp[1]*50,50,50))
 
+    ## Small timer 
     pygame.draw.rect(win, (0,0,0), (450,0,400,40)) 
     font = pygame.font.Font("C:\Windows\Fonts\Arial.ttf", 20)
     text = font.render(str(time.time() - start_time), True, (0,255,0))  
     win.blit(text,(460, 10))
 
+    ## Added instructin for player
     font = pygame.font.Font("C:\Windows\Fonts\Arial.ttf", 20)
     text = font.render("""Use arrow keys to move the box.""", True, (0,255,0))  
     win.blit(text,(460, 70))
@@ -53,6 +55,13 @@ def drow(win, arr, pos, donotchange, start_time):
                 continue
             text = font.render(str(arr[i][j]), True, (0,0,0))  ## Read the value fron arr
             win.blit(text,((j*50)+10, i*50))  ## printing the value to the game bord
+            
+    
+    ## Quit Button
+    pygame.draw.rect(win, (255,255,255), (500,400,140,35))
+    font = pygame.font.Font('freesansbold.ttf', 28)
+    text = font.render("QUIT", True, (0,0,0))  
+    win.blit(text,(536, 405))
 
 
     pygame.display.update()
