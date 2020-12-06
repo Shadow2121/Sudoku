@@ -14,6 +14,11 @@ def main1():
 
     arr = np.zeros((9,9), dtype=int)  ## Makng array of 9X9 to store the values
     donotchange = sudoku_gen.generate(arr)
+    zrs = 0
+    for i in range(9):
+        for j in range(9):
+            if arr[i][j] == 0:
+                zrs += 1
     pos = [0, 0]
 
     start_time = time.time()
@@ -21,6 +26,13 @@ def main1():
     run = True
     while run:
         pygame.time.delay(100)
+
+        if zrs == 0:
+            print("GAME OVER")
+            font = pygame.font.Font('freesansbold.ttf', 50)
+            text = font.render("YOU WON", True, (255,0,0))  
+            win.blit(text,(200, 100))  
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -45,10 +57,13 @@ def main1():
                         pos[1] += 1
                 else:
                     # print(event.key - 48)
+                    print(zrs)
                     if [pos[0], pos[1]] not in donotchange:
                         if (event.key - 48) in range(1, 10):
-                            sudoku_che.check(arr, pos[1], pos[0], (event.key - 48), win)
+                            sudoku_che.check(arr, pos[1], pos[0], (event.key - 48), win, zrs)
                         if event.key == 32:      ## press space bar to remove the element(number)
+                            if arr[pos[1], pos[0]] == 0:
+                                zrs += 1
                             arr[pos[1], pos[0]] = 0
                     else:   ## Displaying the worning message 
                         win.fill((0,0,0))

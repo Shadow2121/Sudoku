@@ -1,6 +1,6 @@
 import pygame
 
-def check(arr, i, j, key, win):
+def check(arr, i, j, key, win,zrs):
     win.fill((0,0,0))
     caninsert = True
     ## Checking in row if the duplicate is there
@@ -39,3 +39,4 @@ def check(arr, i, j, key, win):
                 break
     if caninsert == True:
         arr[i][j] = key
+        zrs -= 1
