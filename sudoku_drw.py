@@ -63,5 +63,10 @@ def drow(win, arr, pos, donotchange, start_time):
     text = font.render("QUIT", True, (0,0,0))  
     win.blit(text,(536, 405))
 
+    ## AI Button
+    pygame.draw.rect(win, (255,255,255), (500,350,140,35))
+    font = pygame.font.Font('freesansbold.ttf', 28)
+    text = font.render("AI", True, (0,0,0))  
+    win.blit(text,(557, 355))
 
     pygame.display.update()
