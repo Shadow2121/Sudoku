@@ -3,52 +3,41 @@ import sudoku_drw
 import pygame
 
 
-def ai(arr, donotchange, win):    
-    # for i in range(9):
-    #     for j in range(9):
-    #         if arr[i, j] == 0:
-    #             for k in range(1,10):
-    #                 sudoku_che.check(arr, i, j, k, win)
-    #                 if arr[i, j] != 0:
-    #                     break
-    #             else:
-    #                 print("lol")
-    #                 j -= 1
-    #                 while [i, j] not in donotchange and j > 0:
-    #                     j -= 1
-    #                     print(j)
-    #                 for k in range(arr[i][j], 9):
-    #                     sudoku_che.check(arr, i, j, k, win)
-    #                     if arr[i, j] != 0:
-    #                         break
-    #             sudoku_drw.drow(win, arr, [0,0], donotchange, 0)
+def ai(arr, donotchange, win):
+    while True:
+        z = 0
+        for i in range(9):
+            dit = {}
+            for j in range(9):
+                if arr[i, j] == 0:
+                    for t in range(1, 10):
+                        sudoku_che.check(arr, i, j, t, win)
+                        if arr[i,j] != 0:
+                            dit[(i,j)] = t
+                            arr[i][j] = 0
+                            break
+            rev_dict = {}   
+            for key, value in dit.items(): 
+                rev_dict.setdefault(value, set()).add(key) 
+                
+            result = [key for key, values in rev_dict.items() if len(values) > 1] 
+            print(dit, result)
+            
+            for key,value in dit.items():
+                if value not in result:
+                    ii,jj = list(key)[0], list(key)[1]
+                    arr[ii,jj] = value
 
-    ans = {}
-    i,j = 0,0
-    while i < 9:
-        j = 0
-        while j < 9:
-            if arr[i, j] == 0:
-                for k in range(1,10):
-                    sudoku_che.check(arr, i, j, k, win)
-                    if arr[i, j] != 0:
-                        ans[(i,j)] = k
-                        break
-                else:
-                    # print(list(ans)[-1])
-                    i, j = list(list(ans)[-1])[0], list(list(ans)[-1])[1]
-                    print(i, j)
-                    ans.pop((i,j))
-                    if arr[i, j] != 9:
-                        arr[i, j] = 0
-                        for k in range(arr[i, j]+1,10):
-                            sudoku_che.check(arr, i, j, k, win)
-                            if arr[i, j] != 0:
-                                ans[(i,j)] = k
-                                break
-                    else:
-                        print("lol")
-            j += 1                
-            sudoku_drw.drow(win, arr, [0,0], donotchange, 0)
-        i += 1
-    # print(ans)
+
+            
+        sudoku_drw.drow(win, arr, [0,0], donotchange, 0)
+
+        ## Exit condition
+        for i in range(9):
+            for j in range(9):
+                if arr[i,j] == 0:
+                    z += 1
+        if z == 0:
+            break
+
+        
