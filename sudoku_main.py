@@ -4,6 +4,7 @@ import sudoku_gen
 import sudoku_che
 import sudoku_drw
 import sudoku_ai
+import new_ai
 import time
 
 def main1():
@@ -31,7 +32,7 @@ def main1():
                 if x in range(500, 640) and y in range(400, 435):
                     run = False
                 if x in range(500, 640) and y in range(350, 385):
-                    sudoku_ai.ai(arr, donotchange, win)
+                    new_ai.solve(arr)
             ## Movement of current block
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
