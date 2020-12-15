@@ -12,7 +12,7 @@ def drow(win, arr, pos, donotchange, start_time):
     ## Small timer 
     pygame.draw.rect(win, (0,0,0), (450,0,400,40)) 
     font = pygame.font.Font("C:\Windows\Fonts\Arial.ttf", 20)
-    text = font.render(str(time.time() - start_time), True, (0,255,0))  
+    text = font.render(str(int(time.time() - start_time)) + " s", True, (0,255,0))  
     win.blit(text,(460, 10))
 
     ## Added instructin for player
@@ -68,5 +68,11 @@ def drow(win, arr, pos, donotchange, start_time):
     font = pygame.font.Font('freesansbold.ttf', 28)
     text = font.render("AI", True, (0,0,0))  
     win.blit(text,(557, 355))
+
+    ## Reset button
+    pygame.draw.rect(win, (255,255,255), (500,300,140,35))
+    font = pygame.font.Font('freesansbold.ttf', 28)
+    text = font.render("RESET", True, (0,0,0))  
+    win.blit(text,(524, 305))
 
     pygame.display.update()

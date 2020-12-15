@@ -33,6 +33,10 @@ def main1():
                     run = False
                 if x in range(500, 640) and y in range(350, 385):
                     new_ai.solve(arr)
+                if x in range(500, 640) and y in range(300, 335):
+                    donotchange = sudoku_gen.generate(arr)
+                    pos = [0, 0]
+                    start_time = time.time()
             ## Movement of current block
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
